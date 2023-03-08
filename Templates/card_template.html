@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #e3f2fd;
+            padding: 10px;
+        }
+
+        img {
+            max-width: 300px;
+            padding: 0 5px 0 5px;
+            margin: 0
+        }
+
+        h3 {
+            text-decoration: underline;
+            margin-top: 0;
+            margin-left: 5px;
+
+
+        }
+
+        .card-one {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 5px 20px 5px;
+            border: 2px solid black;
+            border-radius: 10px;
+            min-width: 300px;
+        }
+
+
+        .card-images {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .card {
+            padding: 10px;
+            margin: 20px 5px 20px 5px;
+            border: 2px solid black;
+            border-radius: 10px;
+            min-width: 300px;
+
+        }
+
+        .card-title {
+            font-weight: 600;
+            font-size: 3em;
+            padding: 0 0 10px 0;
+            text-align: left;
+        }
+
+        .artist-title {
+            font-weight: 600;
+            font-size: 3em;
+            padding: 0 0 10px 0;
+            text-align: center;
+        }
+
+        .card-text,
+        .card-text-one {
+            font-weight: 400;
+            font-size: 2em
+        }
+
+        #card-list,
+        #profile-list {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+
+<body>
+    <template id="card-template">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title"></div>
+                <div class="card-text"></div>
+            </div>
+        </div>
+    </template>
+    <div id="card-list"></div>
+    <template id="artist-template">
+        <div class="card-one">
+            <div class="card-body-one">
+                <div class="artist-title"></div>
+                <div class="card-images"></div>
+            </div>
+            <div class="card-image-bottom"></div>
+        </div>
+    </template>
+    <div id="profile-list"></div>
+</body>
+<script>
+
+    const artist = {
+        name: "Van Gogh",
+        portfolio: [
+            {
+                title: "portrait",
+                url: "https://collectionapi.metmuseum.org/api/collection/v1/iiif/436532/1671316/main-image"
+            },
+            {
+                title: "sky",
+                url: "https://mymodernmet.com/wp/wp-content/uploads/2020/11/White-house-night-van-goh-worldwide-2.jpg"
+            },
+        ]
+    }
+
+    const artistTwo = {
+        name: "Dimitri Wup",
+        portfolio: [
+            {
+                title: "Mountain",
+                url: "https://images.unsplash.com/photo-1602964343204-ce8e29467aa0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1734&q=80"
+            },
+            {
+                title: "tree",
+                url: "https://images.unsplash.com/photo-1539151332289-1693b0b77f89?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
+            },
+
+        ]
+    }
+
+    const data = [{ name: 'Bob', age: 23 }, { name: 'Alice', age: 39 }, { name: 'Janet', age: 55 }, { name: 'Bruce', age: 10 }]
+
+    function addCard(title, text) {
+        const template = document.getElementById("card-template").content.cloneNode(true);
+        template.querySelector('.card-title').innerText = title;
+        template.querySelector('.card-text').innerText = text;
+        document.querySelector('#card-list').appendChild(template);
+    }
+
+    function addArtist(obj) {
+        const artProfile = document.getElementById("artist-template").content.cloneNode(true);
+        artProfile.querySelector('.artist-title').innerText = obj.name;
+        let images = artProfile.querySelector('.card-images')
+        obj.portfolio.forEach(itm => {
+            let title = document.createElement('h3')
+            let img = document.createElement('img')
+            img.setAttribute("src", itm.url)
+            images.appendChild(img)
+            images.appendChild(title)
+            title.innerHTML = itm.title
+        }); document.querySelector('#profile-list').appendChild(artProfile);
+    }
+
+    for (let arr of data) {
+        addCard(arr.name, 'age ' + arr.age)
+    }
+
+    addArtist(artist)
+    addArtist(artist)
+    addArtist(artist)
+    addArtist(artist)
+    addArtist(artist)
+    addArtist(artist)
+    addArtist(artistTwo)
+
+</script>
+
+
+</html>
+
+<!-- //add a border to your cards with CSS and use flexbox to lay them out
+    //modify addCard to accept 2 parameters: one for the title and one for the text, instead of hardcoding them
+    //call the new addCard function 2 or 3 times to create multiple cards with different titles and content
+    //examine the generated HTML using the Dev Inspector browser tool to see how it looks -->
