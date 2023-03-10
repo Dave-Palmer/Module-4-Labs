@@ -1,0 +1,49 @@
+<html>
+
+<head>
+    <title>Moment DateTime Format</title> <!-- reference Moment.js library -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <h2>Moment Date</h2>
+    <!-- container for Moment.js output -->
+    <div id="displayMoment"></div>
+    <h2>JavaScript Date</h2>
+    <!-- container for JavaScript Date output -->
+    <div id="displayJsDate"></div>
+    <h2>Number of days between my birthday and current date</h2>
+    <div id="days-from-birthday"></div>
+    <h2>Numer of years, months, and days between birthdate and current date</h2>
+    <div id="age"></div>
+
+
+
+
+    <script type="text/javascript">
+        (function () {
+            // instantiate a moment object
+            let NowMoment = moment();
+            // instantiate a JavaScript Date object
+            let NowDate = new Date();
+            // display value of moment object in #displayMoment div
+            let eDisplayMoment = document.getElementById('displayMoment');
+            eDisplayMoment.innerHTML = NowMoment;
+            // display value of Date object in #displayJsDate div
+            let eDisplayDate = document.getElementById('displayJsDate');
+            eDisplayDate.innerHTML = NowDate;
+
+            let fromBirthday = document.getElementById('days-from-birthday')
+            fromBirthday.innerHTML = moment("19920422", "DD").fromNow();
+
+            let myTotalAge = document.getElementById('age')
+
+        })();
+
+
+//         moment.max(moment('2016-01-01'), moment('2016-02-01')).format()
+// "2016-02-01T00:00:00-06:00"
+    </script>
+</body>
+
+</html>

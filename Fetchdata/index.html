@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Fetch Data</title>
+</head>
+
+<template id="card-template">
+    <div class="card m-3" style="width: 18rem;">
+        <img width="100px" id="beer-image" src="..." class="card-img-top"
+            alt="https://images.unsplash.com/photo-1608742598121-15038a8db33c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80">
+        <div class="card-body">
+            <h5 class="card-title"></h5>
+            <h6 id="abv"></h6>
+            <p class="card-text"></p>
+        </div>
+    </div>
+</template>
+
+<body>
+    <h1 style="text-align: center;">List of Beers</h1>
+
+    <div class="container justify-content-center">
+        <div id="beer-list" class="row"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script>
+        function addObject(obj) {
+            for (let ob of obj) {
+                const template = document.getElementById("card-template").content.cloneNode(true);
+                template.querySelector('#beer-image').src = ob.image_url
+                template.querySelector('.card-title').innerText = ob.name;
+                template.querySelector('.card-text').innerText = ob.description;
+                template.querySelector('#abv').innerText = ob.abv + '%';
+                document.querySelector('#beer-list').appendChild(template);
+            }
+
+        }
+
+        function getCars() {
+            return new Promise(resolve => {
+                setTimeout(function () {
+                    resolve(addCards(cars))
+                }, 1000)
+            })
+        }
+
+        // fetch('https://api.punkapi.com/v2/beers?beer_name=stout')
+        //     .then(response => response.json())
+        //     .then(json => addObject(json))
+
+        axios("https://api.punkapi.com/v2/beers/")
+            .then(response => addObject(response.data));
+    </script>
+</body>
+
+</html>

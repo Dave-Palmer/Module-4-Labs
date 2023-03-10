@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: aquamarine;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #card-list {
+            justify-content: space-evenly;
+        }
+    </style>
+    <title>News Update</title>
+
+    <template id="news-card">
+        <div class="card" style="width: 18rem; height: 18rem; margin: 20px; border: 2px solid green">
+            <div class="card-body">
+                <h5 class="news-title"></h5>
+                <p class="news-content"></p>
+            </div>
+        </div>
+    </template>
+
+</head>
+
+<body>
+    <h1>The News!!!</h1>
+
+    <main>
+        <form id="news-form" class="container mt-4 mb-4">
+            <div class="mb-3">
+                <label for="news-form-title" class="form-label">News Title</label>
+                <input type="text" class="form-control" id="news-form-title" aria-describedby="emailHelp" required>
+            </div>
+            <div class="mb-3">
+                <label for="news-form-content" class="form-label">News Content</label>
+                <input type="text" class="form-control" id="news-form-content" required>
+            </div>
+            <button id="form-submit" type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <div class="container">
+            <div id="card-list" class="row justify-content-center">
+            </div>
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+
+    <script src="script.js"></script>
+</body>
+
+
+</html>
