@@ -17,7 +17,11 @@
         <div class="card-body">
             <h5 class="card-title"></h5>
             <h6 id="abv"></h6>
-            <p class="card-text"></p>
+            <h5>Ingredients:</h5>
+            <h6>Malt</h6>
+            <p class="card-text-malt"></p>
+            <h6>Hops</h6>
+            <p class="card-text-hops"></p>
         </div>
     </div>
 </template>
@@ -37,15 +41,19 @@
         function addObject(obj) {
             for (let ob of obj) {
                 const template = document.getElementById("card-template").content.cloneNode(true);
-                template.querySelector('#beer-image').src = ob.image_url
+                ob.ingredients.hops.forEach(hop => {
+                    template.querySelector('.card-text-hops').innerText += `\n${hop.name} \n${hop.amount.value} ${hop.amount.unit}\nadd at ${hop.add} of boil`
+                });
+                ob.ingredients.malt.forEach(malt => {
+                    template.querySelector('.card-text-malt').innerText += `\n${malt.name}\n ${malt.amount.value} ${malt.amount.unit}`
+                })
+                // template.querySelector('#beer-image').src = ob.image_url
                 template.querySelector('.card-title').innerText = ob.name;
-                template.querySelector('.card-text').innerText = ob.description;
+                // template.querySelector('.card-text').innerText = ob.ingredients.malt[1].name;
                 template.querySelector('#abv').innerText = ob.abv + '%';
                 document.querySelector('#beer-list').appendChild(template);
             }
-
         }
-
         function getCars() {
             return new Promise(resolve => {
                 setTimeout(function () {
